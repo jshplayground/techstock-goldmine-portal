@@ -6,7 +6,8 @@ export interface DeviceCapability {
   isMobile: boolean;
   prefersReducedMotion: boolean;
   connectionSpeed: 'slow' | 'medium' | 'fast';
-  isMidRangeDevice?: boolean; // Add this property
+  isMidRangeDevice: boolean;
+  isHighEndDevice: boolean;
 }
 
 export function useDeviceCapability(): DeviceCapability {
@@ -15,17 +16,19 @@ export function useDeviceCapability(): DeviceCapability {
     isMobile: false,
     prefersReducedMotion: false,
     connectionSpeed: 'medium',
-    isMidRangeDevice: false, // Set default value
+    isMidRangeDevice: false,
+    isHighEndDevice: false,
   });
 
   useEffect(() => {
-    // Simplified device detection based primarily on screen size
+    // Device detection based on screen size and pixel ratio
     const isMobile = window.innerWidth < 768;
+    const pixelRatio = window.devicePixelRatio || 1;
     
     // Check if user prefers reduced motion
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     
-    // Estimate connection speed (simplified approach)
+    // Estimate connection speed (improved approach)
     let connectionSpeed: 'slow' | 'medium' | 'fast' = 'medium';
     
     // Use the Navigation API if available to determine connection speed
@@ -43,12 +46,14 @@ export function useDeviceCapability(): DeviceCapability {
     }
     
     // Low power device determination
-    // We'll consider older mobile devices or devices with reduced data/motion as low power
     const isLowPowerDevice = (isMobile && connectionSpeed === 'slow') || prefersReducedMotion;
 
     // Determine if device is mid-range
-    // Mid-range is mobile but not low power
     const isMidRangeDevice = isMobile && !isLowPowerDevice;
+    
+    // Determine high-end devices (desktop with good connection or high-end mobile)
+    const isHighEndDevice = (!isMobile && connectionSpeed === 'fast') || 
+                           (isMobile && pixelRatio >= 2 && connectionSpeed === 'fast');
 
     setCapability({
       isLowPowerDevice,
@@ -56,16 +61,20 @@ export function useDeviceCapability(): DeviceCapability {
       prefersReducedMotion,
       connectionSpeed,
       isMidRangeDevice,
+      isHighEndDevice,
     });
 
     const handleResize = () => {
       setCapability(prev => {
         const newIsMobile = window.innerWidth < 768;
         const newIsMidRange = newIsMobile && !prev.isLowPowerDevice;
+        const newHighEnd = (!newIsMobile && prev.connectionSpeed === 'fast') || 
+                          (newIsMobile && window.devicePixelRatio >= 2 && prev.connectionSpeed === 'fast');
         return {
           ...prev,
           isMobile: newIsMobile,
-          isMidRangeDevice: newIsMidRange
+          isMidRangeDevice: newIsMidRange,
+          isHighEndDevice: newHighEnd
         };
       });
     };

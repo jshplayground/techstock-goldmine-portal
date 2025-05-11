@@ -36,9 +36,10 @@ export const HeroSection = () => {
       <Navbar />
 
       <div className="relative min-h-screen">
-        {/* New Native Video Background */}
+        {/* Enhanced Video Background */}
         <NativeVideoBackground 
           videoSrc="/assets/space-background.mp4"
+          mobileSrc="/assets/space-background-mobile.mp4" 
           fallbackImageUrl="https://i.ytimg.com/vi/Bm5cNYxQWeM/maxresdefault.jpg"
           posterImage="https://i.ytimg.com/vi/Bm5cNYxQWeM/maxresdefault.jpg"
         />
