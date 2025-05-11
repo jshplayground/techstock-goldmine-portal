@@ -8,12 +8,13 @@ interface VideoBackgroundProps {
 }
 
 export function OptimizedVideoBackground({ videoId, fallbackImageUrl }: VideoBackgroundProps) {
-  const { isLowPowerDevice, isMobile } = useDeviceCapability();
+  const { isLowPowerDevice, prefersReducedMotion } = useDeviceCapability();
   
   // Use a default fallback image if none provided
   const imageUrl = fallbackImageUrl || 'https://i.ytimg.com/vi/' + videoId + '/maxresdefault.jpg';
 
-  if (isLowPowerDevice || isMobile) {
+  // Only use the image fallback for low power devices or users who prefer reduced motion
+  if (isLowPowerDevice || prefersReducedMotion) {
     return (
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <div className="relative w-full h-full">
@@ -35,7 +36,7 @@ export function OptimizedVideoBackground({ videoId, fallbackImageUrl }: VideoBac
       <div className="relative w-full h-full">
         <iframe 
           src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&loop=1&playlist=${videoId}&playsinline=1&rel=0&showinfo=0&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0`}
-          allow="autoplay; encrypted-media" 
+          allow="autoplay; encrypted-media; picture-in-picture; web-share" 
           className="absolute w-[300%] md:w-[200%] lg:w-[150%] xl:w-full h-[150%] sm:h-[130%] md:h-full -top-[25%] sm:-top-[15%] md:top-0 -left-[100%] md:-left-[50%] lg:-left-[25%] xl:left-0 pointer-events-none"
           style={{ filter: 'brightness(0.5)' }}
         ></iframe>

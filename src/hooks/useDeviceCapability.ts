@@ -19,17 +19,18 @@ export function useDeviceCapability(): DeviceCapability {
     const isMobile = window.innerWidth < 768;
     
     // Check if device is likely low power (simplified heuristic)
-    // We consider most mobile devices as potentially low power
-    // This is a simple approach - more sophisticated detection can be added
-    let isLowPowerDevice = isMobile;
+    // This is a more conservative approach that only marks truly low-end devices
+    let isLowPowerDevice = false;
     
-    // Some modern phones have good performance, try to detect them
+    // Check user agent for older devices that might struggle with video
     const userAgent = navigator.userAgent;
-    const isHighEndMobileDevice = 
-      /iPhone 1[3-9]|iPhone 2[0-9]|iPad Pro|Pixel [4-9]|Galaxy S2[0-9]|OnePlus [8-9]/.test(userAgent);
+    const isOlderDevice = 
+      /Android (4|5|6)/.test(userAgent) ||
+      /iPhone (5|6|7|8)/.test(userAgent) ||
+      /iPad (?!Pro)/.test(userAgent);
       
-    if (isHighEndMobileDevice) {
-      isLowPowerDevice = false;
+    if (isOlderDevice) {
+      isLowPowerDevice = true;
     }
 
     // Check if user prefers reduced motion

@@ -6,14 +6,17 @@ import { Link } from 'react-router-dom';
 import { Youtube } from "lucide-react";
 import { OptimizedVideoBackground } from './optimized-video-background';
 import { useDeviceCapability } from '@/hooks/useDeviceCapability';
+
 export const HeroSection = () => {
   const heroContentRef = useRef<HTMLDivElement>(null);
   const {
     isLowPowerDevice
   } = useDeviceCapability();
+
   useEffect(() => {
     // Skip fade effect on scroll for low power devices
     if (isLowPowerDevice) return;
+    
     const handleScroll = () => {
       if (heroContentRef.current) {
         requestAnimationFrame(() => {
@@ -26,35 +29,43 @@ export const HeroSection = () => {
         });
       }
     };
+    
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isLowPowerDevice]);
-  return <div className="relative">
+
+  return (
+    <div className="relative">
       <Navbar />
 
       <div className="relative min-h-screen">
-        {/* Optimized Video/Image Background */}
-        <OptimizedVideoBackground videoId="XQe81I0SAho" />
+        {/* Optimized Video/Image Background with updated video ID */}
+        <OptimizedVideoBackground videoId="Bm5cNYxQWeM" />
 
-        <div ref={heroContentRef} style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        zIndex: 10,
-        pointerEvents: 'none'
-      }}>
+        <div 
+          ref={heroContentRef} 
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100vh',
+            display: 'flex',
+            justifyContent: 'flex-start',
+            alignItems: 'center',
+            zIndex: 10,
+            pointerEvents: 'none'
+          }}
+        >
           <div className="container mx-auto">
             <HeroContent />
           </div>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 function HeroContent() {
   return <div className="text-left text-white pt-16 sm:pt-24 md:pt-32 px-4 max-w-3xl">
       <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold mb-4 leading-tight tracking-wide">
@@ -73,6 +84,7 @@ function HeroContent() {
       </div>
     </div>;
 }
+
 function Navbar() {
   const [hoveredNavItem, setHoveredNavItem] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
