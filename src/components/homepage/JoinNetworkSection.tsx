@@ -2,6 +2,7 @@
 import React from 'react';
 import { Globe } from '@/components/ui/globe';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 const JoinNetworkSection = () => {
   return (
@@ -36,19 +37,38 @@ const JoinNetworkSection = () => {
           </div>
         </div>
         
-        {/* Globe Visualization */}
+        {/* Visualization */}
         <div className="lg:w-1/2 h-[400px] md:h-[500px] relative">
           <div className="relative h-full w-full">
             <Globe className="opacity-70" />
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 md:w-32 md:h-32 rounded-full bg-techstock-gold/20 backdrop-blur-2xl flex items-center justify-center">
+            
+            {/* Stats overlays */}
+            <motion.div 
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 md:w-32 md:h-32 rounded-full bg-techstock-gold/20 backdrop-blur-2xl flex items-center justify-center"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
               <span className="text-3xl md:text-4xl font-bold text-techstock-gold">3K+</span>
-            </div>
-            <div className="absolute top-[30%] right-[20%] px-3 py-2 rounded-lg backdrop-blur bg-black/30 border border-techstock-gold/20 text-sm text-white">
+            </motion.div>
+            
+            <motion.div 
+              className="absolute top-[30%] right-[20%] px-3 py-2 rounded-lg backdrop-blur bg-black/30 border border-techstock-gold/20 text-sm text-white"
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+            >
               36X Returns
-            </div>
-            <div className="absolute bottom-[25%] left-[15%] px-3 py-2 rounded-lg backdrop-blur bg-black/30 border border-techstock-gold/20 text-sm text-white">
+            </motion.div>
+            
+            <motion.div 
+              className="absolute bottom-[25%] left-[15%] px-3 py-2 rounded-lg backdrop-blur bg-black/30 border border-techstock-gold/20 text-sm text-white"
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.7 }}
+            >
               Global Community
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
