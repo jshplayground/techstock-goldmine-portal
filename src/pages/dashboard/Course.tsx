@@ -1,10 +1,9 @@
-
 import React, { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
 import { Button } from '@/components/ui/button';
-import { Progress } from '@/components/ui/progress';
 import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { getDescriptionByTitle } from '@/lib/course-descriptions';
 
 interface Module {
   id: number;
@@ -97,7 +96,6 @@ const Course = () => {
   
   const totalLessons = modules.reduce((sum, module) => sum + module.lessons.length, 0);
   const completedLessons = modules.reduce((sum, module) => sum + module.lessons.filter(lesson => lesson.completed).length, 0);
-  const overallProgress = Math.round((completedLessons / totalLessons) * 100);
 
   return (
     <div className="h-screen flex bg-black">
@@ -113,11 +111,6 @@ const Course = () => {
                 <span className="font-medium text-white">{completedLessons}</span> / {totalLessons} lessons completed
               </div>
             </div>
-          </div>
-          <div className="mt-3">
-            <Progress value={overallProgress} className="h-2 bg-gray-700">
-              <div className="h-full bg-techstock-purple rounded-full"></div>
-            </Progress>
           </div>
         </header>
         
@@ -146,19 +139,13 @@ const Course = () => {
                         <div className="flex justify-between">
                           <span className="font-medium text-white">{module.id}. {module.title}</span>
                           <span className={`text-xs ${module.progress === 100 ? 'text-green-400' : module.progress > 0 ? 'text-yellow-400' : 'text-gray-400'}`}>
-                            {module.progress}%
+                            {module.progress === 100 ? 'Completed' : module.progress > 0 ? 'In progress' : 'Not started'}
                           </span>
                         </div>
                         
                         <div className="mt-1 text-xs text-gray-400 flex justify-between">
                           <span>{module.lessons.length} lessons</span>
                           <span>{module.duration}</span>
-                        </div>
-                        
-                        <div className="mt-2">
-                          <Progress value={module.progress} className="h-1 bg-gray-700">
-                            <div className="h-full bg-techstock-purple rounded-full"></div>
-                          </Progress>
                         </div>
                       </div>
                     ))}
@@ -170,7 +157,9 @@ const Course = () => {
                   {/* Module details */}
                   <div className="p-6 border-b border-techstock-gray/30">
                     <h2 className="text-xl font-bold text-white">{modules[activeModule - 1].title}</h2>
-                    <p className="mt-2 text-gray-300">{modules[activeModule - 1].description}</p>
+                    <p className="mt-3 text-gray-300 leading-relaxed">
+                      {getDescriptionByTitle(modules[activeModule - 1].title)}
+                    </p>
                     
                     <div className="mt-4 flex flex-wrap items-center gap-4 text-sm">
                       <div className="flex items-center text-gray-400">

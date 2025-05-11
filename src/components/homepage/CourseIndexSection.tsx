@@ -3,6 +3,8 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Badge } from "@/components/ui/badge";
 import { Book, Clock, Check } from "lucide-react";
 import { Link } from 'react-router-dom';
+import { getDescriptionByTitle } from '@/lib/course-descriptions';
+
 interface CourseModuleLesson {
   title: string;
   duration?: string;
@@ -538,14 +540,9 @@ const CourseIndexSection: React.FC<CourseIndexSectionProps> = ({
                     </AccordionTrigger>
                     <AccordionContent className="px-6 pb-6 pt-2">
                       <div className="pl-14">
-                        <p className="text-gray-400 mb-4">{module.description}</p>
-                        
-                        {/* Progress bar */}
-                        <div className="w-full bg-gray-800 rounded-full h-2 mb-6">
-                          <div className="bg-gradient-to-r from-techstock-gold-dark to-techstock-gold h-2 rounded-full" style={{
-                        width: `${module.progress}%`
-                      }}></div>
-                        </div>
+                        <p className="text-gray-400 mb-6 leading-relaxed">
+                          {getDescriptionByTitle(module.title)}
+                        </p>
                         
                         <h4 className="text-sm font-medium text-gray-300 mb-3 flex items-center">
                           <Book className="w-4 h-4 mr-2" />
@@ -598,14 +595,9 @@ const CourseIndexSection: React.FC<CourseIndexSectionProps> = ({
                     </AccordionTrigger>
                     <AccordionContent className="px-6 pb-6 pt-2">
                       <div className="pl-14">
-                        <p className="text-gray-400 mb-4">{module.description}</p>
-                        
-                        {/* Progress bar */}
-                        <div className="w-full bg-gray-800 rounded-full h-2 mb-6">
-                          <div className="bg-gradient-to-r from-techstock-gold-dark to-techstock-gold h-2 rounded-full" style={{
-                        width: `${module.progress}%`
-                      }}></div>
-                        </div>
+                        <p className="text-gray-400 mb-6 leading-relaxed">
+                          {getDescriptionByTitle(module.title)}
+                        </p>
                         
                         <h4 className="text-sm font-medium text-gray-300 mb-3 flex items-center">
                           <Book className="w-4 h-4 mr-2" />
@@ -666,14 +658,9 @@ const CourseIndexSection: React.FC<CourseIndexSectionProps> = ({
                     </AccordionTrigger>
                     <AccordionContent className="px-6 pb-6 pt-2">
                       <div className="pl-14">
-                        <p className="text-gray-400 mb-4">{module.description}</p>
-                        
-                        {/* Progress bar */}
-                        <div className="w-full bg-gray-800 rounded-full h-2 mb-6">
-                          <div className="bg-gradient-to-r from-techstock-gold-dark to-techstock-gold h-2 rounded-full" style={{
-                        width: `${module.progress}%`
-                      }}></div>
-                        </div>
+                        <p className="text-gray-400 mb-6 leading-relaxed">
+                          {getDescriptionByTitle(module.title)}
+                        </p>
                         
                         <h4 className="text-sm font-medium text-gray-300 mb-3 flex items-center">
                           <Book className="w-4 h-4 mr-2" />
@@ -726,14 +713,9 @@ const CourseIndexSection: React.FC<CourseIndexSectionProps> = ({
                     </AccordionTrigger>
                     <AccordionContent className="px-6 pb-6 pt-2">
                       <div className="pl-14">
-                        <p className="text-gray-400 mb-4">{module.description}</p>
-                        
-                        {/* Progress bar */}
-                        <div className="w-full bg-gray-800 rounded-full h-2 mb-6">
-                          <div className="bg-gradient-to-r from-techstock-gold-dark to-techstock-gold h-2 rounded-full" style={{
-                        width: `${module.progress}%`
-                      }}></div>
-                        </div>
+                        <p className="text-gray-400 mb-6 leading-relaxed">
+                          {getDescriptionByTitle(module.title)}
+                        </p>
                         
                         <h4 className="text-sm font-medium text-gray-300 mb-3 flex items-center">
                           <Book className="w-4 h-4 mr-2" />
