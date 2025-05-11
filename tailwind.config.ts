@@ -64,9 +64,9 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				techstock: {
-					purple: '#8200DB',
-					'purple-light': '#9b87f5',
-					'purple-dark': '#6E59A5',
+					gold: '#F5A623',
+					'gold-light': '#F7C56B',
+					'gold-dark': '#D48C15',
 					black: '#0d0d18',
 					gray: '#322D36'
 				}
