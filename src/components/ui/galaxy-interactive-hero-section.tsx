@@ -69,10 +69,7 @@ function HeroContent() {
       }}>
           Access the Course
         </Link>
-        <button className="pointer-events-auto bg-[#0009] border border-gray-600 hover:border-gray-400 text-gray-200 hover:text-white font-medium py-2 sm:py-3 px-6 sm:px-8 rounded-full transition duration-300 flex items-center justify-center w-full sm:w-auto">
-          <Youtube className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-          Watch Demo
-        </button>
+        
       </div>
     </div>;
 }
