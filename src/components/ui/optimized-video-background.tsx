@@ -8,13 +8,13 @@ interface VideoBackgroundProps {
 }
 
 export function OptimizedVideoBackground({ videoId, fallbackImageUrl }: VideoBackgroundProps) {
-  const { isLowPowerDevice, isMobile, connectionSpeed } = useDeviceCapability();
+  const { isLowPowerDevice, isMobile, isMidRangeDevice } = useDeviceCapability();
   
   // Use a default fallback image if none provided
   const imageUrl = fallbackImageUrl || 'https://i.ytimg.com/vi/' + videoId + '/maxresdefault.jpg';
 
   // Only show the image on truly low-power devices
-  if (isLowPowerDevice || connectionSpeed === 'slow') {
+  if (isLowPowerDevice) {
     return (
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <div className="relative w-full h-full">
@@ -31,13 +31,13 @@ export function OptimizedVideoBackground({ videoId, fallbackImageUrl }: VideoBac
     );
   }
   
-  // Different quality and positioning for mobile vs desktop
-  const videoQuality = connectionSpeed === 'fast' ? "hd720" : "medium";
+  // Different sizing and positioning for mobile vs desktop
+  const videoClasses = isMobile || isMidRangeDevice
+    ? "absolute w-[300%] h-[150%] -top-[25%] -left-[100%] pointer-events-none"
+    : "absolute w-[200%] md:w-[150%] xl:w-full h-[130%] md:h-full -top-[15%] md:top-0 -left-[50%] lg:-left-[25%] xl:left-0 pointer-events-none";
   
-  // Improved responsive positioning
-  const videoClasses = isMobile
-    ? "absolute w-auto min-w-[200%] h-full left-1/2 -translate-x-1/2 pointer-events-none"
-    : "absolute w-full h-full object-cover pointer-events-none";
+  // Lower quality parameters for mid-range devices
+  const videoQuality = isMidRangeDevice ? "modest" : "default";
   
   return (
     <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">

@@ -1,19 +1,19 @@
-
 "use client";
 
 import React, { useEffect, useRef, useState } from 'react';
+import { Suspense, lazy } from 'react';
 import { Link } from 'react-router-dom';
-import { NativeVideoBackground } from './native-video-background';
+import { Youtube } from "lucide-react";
+import { OptimizedVideoBackground } from './optimized-video-background';
 import { useDeviceCapability } from '@/hooks/useDeviceCapability';
-
 export const HeroSection = () => {
   const heroContentRef = useRef<HTMLDivElement>(null);
-  const { isLowPowerDevice } = useDeviceCapability();
-  
+  const {
+    isLowPowerDevice
+  } = useDeviceCapability();
   useEffect(() => {
     // Skip fade effect on scroll for low power devices
     if (isLowPowerDevice) return;
-    
     const handleScroll = () => {
       if (heroContentRef.current) {
         requestAnimationFrame(() => {
@@ -26,48 +26,35 @@ export const HeroSection = () => {
         });
       }
     };
-    
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isLowPowerDevice]);
-  
-  return (
-    <div className="relative">
+  return <div className="relative">
       <Navbar />
 
       <div className="relative min-h-screen">
-        {/* Enhanced Video Background */}
-        <NativeVideoBackground 
-          videoSrc="/assets/space-background.mp4"
-          mobileSrc="/assets/space-background-mobile.mp4" 
-          fallbackImageUrl="https://i.ytimg.com/vi/Bm5cNYxQWeM/maxresdefault.jpg"
-          posterImage="https://i.ytimg.com/vi/Bm5cNYxQWeM/maxresdefault.jpg"
-        />
+        {/* Optimized Video/Image Background */}
+        <OptimizedVideoBackground videoId="XQe81I0SAho" />
 
-        <div 
-          ref={heroContentRef} 
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100vh',
-            display: 'flex',
-            justifyContent: 'flex-start',
-            alignItems: 'center',
-            zIndex: 10,
-            pointerEvents: 'none'
-          }}
-        >
+        <div ref={heroContentRef} style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100vh',
+        display: 'flex',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        zIndex: 10,
+        pointerEvents: 'none'
+      }}>
           <div className="container mx-auto">
             <HeroContent />
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 function HeroContent() {
   return <div className="text-left text-white pt-16 sm:pt-24 md:pt-32 px-4 max-w-3xl">
       <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold mb-4 leading-tight tracking-wide">
@@ -86,7 +73,6 @@ function HeroContent() {
       </div>
     </div>;
 }
-
 function Navbar() {
   const [hoveredNavItem, setHoveredNavItem] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -161,10 +147,10 @@ function Navbar() {
               backdropFilter: 'blur(8px)',
               WebkitBackdropFilter: 'blur(8px)'
             }}>
-              <Link to="/login" className="block px-4 py-2 text-sm text-gray-300 hover:text-gray-100 hover:bg-gray-800/30 transition duration-150">Access the Course</Link>
-              <a href="#testimonials" className="block px-4 py-2 text-sm text-gray-300 hover:text-gray-100 hover:bg-gray-800/30 transition duration-150">Testimonials</a>
-              <a href="#about" className="block px-4 py-2 text-sm text-gray-300 hover:text-gray-100 hover:bg-gray-800/30 transition duration-150">About Antonio Linares</a>
-            </div>
+                <Link to="/login" className="block px-4 py-2 text-sm text-gray-300 hover:text-gray-100 hover:bg-gray-800/30 transition duration-150">Access the Course</Link>
+                <a href="#testimonials" className="block px-4 py-2 text-sm text-gray-300 hover:text-gray-100 hover:bg-gray-800/30 transition duration-150">Testimonials</a>
+                <a href="#about" className="block px-4 py-2 text-sm text-gray-300 hover:text-gray-100 hover:bg-gray-800/30 transition duration-150">About Antonio Linares</a>
+              </div>
             </div>
 
             <a href="#about" className={navLinkClass('about')} onMouseEnter={() => handleMouseEnterNavItem('about')} onMouseLeave={handleMouseLeaveNavItem}>

@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+
+import React from 'react';
 import { HeroSection } from '@/components/ui/galaxy-interactive-hero-section';
 import AboutSection from '@/components/homepage/AboutSection';
 import TestimonialsSection from '@/components/homepage/TestimonialsSection';
@@ -7,27 +8,8 @@ import CourseIndexSection from '@/components/homepage/CourseIndexSection';
 import JoinNetworkSection from '@/components/homepage/JoinNetworkSection';
 import { Link } from 'react-router-dom';
 import { BackgroundPaths } from '@/components/ui/background-paths';
-import { useDeviceCapability } from '@/hooks/useDeviceCapability';
 
 const Index = () => {
-  const { isMobile } = useDeviceCapability();
-  
-  // Preload the video for better performance
-  useEffect(() => {
-    // Choose which version to preload based on device
-    const videoSrc = isMobile ? '/assets/space-background-mobile.mp4' : '/assets/space-background.mp4';
-    
-    const videoPreload = document.createElement('link');
-    videoPreload.rel = 'preload';
-    videoPreload.href = videoSrc;
-    videoPreload.as = 'video';
-    document.head.appendChild(videoPreload);
-    
-    return () => {
-      document.head.removeChild(videoPreload);
-    };
-  }, [isMobile]);
-
   return (
     <div className="min-h-screen bg-black text-white relative">
       {/* Background Animation */}
