@@ -1,16 +1,15 @@
 
 import React from 'react';
-import { Globe } from '@/components/ui/globe';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { ContainerScroll } from '@/components/ui/container-scroll-animation';
 
 const JoinNetworkSection = () => {
   return (
     <section className="py-16 bg-transparent relative overflow-hidden">
-      <div className="container mx-auto px-4 flex flex-col lg:flex-row items-center justify-between gap-8">
-        {/* Content */}
-        <div className="lg:w-1/2 relative z-10">
-          <div className="max-w-xl">
+      <ContainerScroll
+        titleComponent={
+          <div className="max-w-xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
               Join a <span className="text-techstock-gold">world-class</span> network of successful investors
             </h2>
@@ -19,7 +18,7 @@ const JoinNetworkSection = () => {
               Connect with like-minded investors who are applying Antonio's framework to achieve extraordinary returns in the technology sector. Share insights, discuss investment opportunities, and learn from others' experiences.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link 
                 to="/login" 
                 className="bg-techstock-gold hover:bg-techstock-gold-dark text-black font-semibold py-3 px-8 rounded-full transition duration-300 text-center"
@@ -35,43 +34,45 @@ const JoinNetworkSection = () => {
               </Link>
             </div>
           </div>
+        }
+      >
+        {/* Community chat image */}
+        <div className="relative h-full w-full">
+          <img 
+            src="/discord-community-chat.png" 
+            alt="Community chat" 
+            className="mx-auto rounded-xl object-cover h-full w-full" 
+          />
+          
+          {/* Stats overlays */}
+          <motion.div 
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 md:w-32 md:h-32 rounded-full bg-techstock-gold/20 backdrop-blur-2xl flex items-center justify-center"
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <span className="text-3xl md:text-4xl font-bold text-techstock-gold">3K+</span>
+          </motion.div>
+          
+          <motion.div 
+            className="absolute top-[30%] right-[20%] px-3 py-2 rounded-lg backdrop-blur bg-black/30 border border-techstock-gold/20 text-sm text-white"
+            initial={{ y: -20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+          >
+            36X Returns
+          </motion.div>
+          
+          <motion.div 
+            className="absolute bottom-[25%] left-[15%] px-3 py-2 rounded-lg backdrop-blur bg-black/30 border border-techstock-gold/20 text-sm text-white"
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.7 }}
+          >
+            Global Community
+          </motion.div>
         </div>
-        
-        {/* Visualization */}
-        <div className="lg:w-1/2 h-[400px] md:h-[500px] relative">
-          <div className="relative h-full w-full">
-            <Globe className="opacity-70" />
-            
-            {/* Stats overlays */}
-            <motion.div 
-              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 md:w-32 md:h-32 rounded-full bg-techstock-gold/20 backdrop-blur-2xl flex items-center justify-center"
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              <span className="text-3xl md:text-4xl font-bold text-techstock-gold">3K+</span>
-            </motion.div>
-            
-            <motion.div 
-              className="absolute top-[30%] right-[20%] px-3 py-2 rounded-lg backdrop-blur bg-black/30 border border-techstock-gold/20 text-sm text-white"
-              initial={{ y: -20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-            >
-              36X Returns
-            </motion.div>
-            
-            <motion.div 
-              className="absolute bottom-[25%] left-[15%] px-3 py-2 rounded-lg backdrop-blur bg-black/30 border border-techstock-gold/20 text-sm text-white"
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.7 }}
-            >
-              Global Community
-            </motion.div>
-          </div>
-        </div>
-      </div>
+      </ContainerScroll>
     </section>
   );
 };
