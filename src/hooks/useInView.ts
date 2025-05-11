@@ -17,64 +17,42 @@ export function useInView({
 }: UseInViewOptions = {}) {
   const ref = useRef<HTMLElement | null>(null);
   const [isInView, setIsInView] = useState(false);
-  const { isLowPowerDevice, prefersReducedMotion } = useDeviceCapability();
+  const { isLowPowerDevice } = useDeviceCapability();
 
   useEffect(() => {
     if (!ref.current) return;
     
-    // If it's a low power device or user prefers reduced motion and we want to disable animations
-    // Just set it to true immediately and skip creating observers
-    if ((disableOnLowPower && (isLowPowerDevice || prefersReducedMotion))) {
+    // If it's a low power device and we want to disable animations on such devices
+    if (disableOnLowPower && isLowPowerDevice) {
       setIsInView(true);
       return;
     }
 
-    // Use a more lenient threshold for low-power devices that don't completely disable animations
-    const effectiveThreshold = isLowPowerDevice ? 0.05 : threshold;
-    
-    // Use requestIdleCallback for creating the observer on low-priority devices
-    const createObserver = () => {
-      if (!ref.current) return;
-      
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setIsInView(true);
-            if (triggerOnce) {
-              observer.disconnect();
-            }
-          } else if (!triggerOnce) {
-            setIsInView(false);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+          if (triggerOnce) {
+            observer.disconnect();
           }
-        },
-        {
-          threshold: effectiveThreshold,
-          rootMargin,
+        } else if (!triggerOnce) {
+          setIsInView(false);
         }
-      );
-  
-      observer.observe(ref.current);
-      
-      return () => {
-        if (ref.current) {
-          observer.unobserve(ref.current);
-        }
-      };
+      },
+      {
+        threshold,
+        rootMargin,
+      }
+    );
+
+    observer.observe(ref.current);
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
     };
-    
-    // Use requestIdleCallback for non-critical functionality if available
-    if (typeof window.requestIdleCallback !== 'undefined' && isLowPowerDevice) {
-      const id = window.requestIdleCallback(() => {
-        const cleanup = createObserver();
-        return () => {
-          cleanup && cleanup();
-        };
-      });
-      return () => window.cancelIdleCallback(id);
-    } else {
-      return createObserver();
-    }
-  }, [threshold, rootMargin, triggerOnce, isLowPowerDevice, prefersReducedMotion, disableOnLowPower]);
+  }, [threshold, rootMargin, triggerOnce, isLowPowerDevice, disableOnLowPower]);
 
   return { ref, isInView };
 }
