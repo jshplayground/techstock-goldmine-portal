@@ -9,13 +9,15 @@ interface AnimatedSectionProps {
   className?: string;
   delay?: number;
   animation?: 'fade' | 'slide-up' | 'slide-right' | 'none';
+  mobileSpacing?: boolean; // New prop to control mobile spacing
 }
 
 export const AnimatedSection: React.FC<AnimatedSectionProps> = ({ 
   children, 
   className, 
   delay = 0,
-  animation = 'fade'
+  animation = 'fade',
+  mobileSpacing = false
 }) => {
   const { ref, isInView } = useInView({
     threshold: 0.15,
@@ -52,7 +54,10 @@ export const AnimatedSection: React.FC<AnimatedSectionProps> = ({
       initial={animation === 'none' ? 'none' : 'hidden'}
       animate={isInView || animation === 'none' ? 'visible' : 'hidden'}
       variants={variants}
-      className={cn(className)}
+      className={cn(
+        mobileSpacing && 'mt-6 md:mt-0',
+        className
+      )}
     >
       {children}
     </motion.div>

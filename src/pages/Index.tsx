@@ -76,8 +76,8 @@ const Index = () => {
         </div>
       </AnimatedSection>
       
-      {/* Join Network Section */}
-      <AnimatedSection animation="fade" className="relative">
+      {/* Join Network Section - Added mobileSpacing prop */}
+      <AnimatedSection animation="fade" className="relative" mobileSpacing={true}>
         <JoinNetworkSection />
       </AnimatedSection>
       

@@ -1,8 +1,10 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ContainerScroll } from '@/components/ui/container-scroll-animation';
 import { useDeviceCapability } from '@/hooks/useDeviceCapability';
+
 const JoinNetworkSection = () => {
   const {
     isLowPowerDevice,
@@ -11,10 +13,10 @@ const JoinNetworkSection = () => {
 
   // For low power devices, render a simplified version without animation
   if (isLowPowerDevice) {
-    return <section className="py-16 bg-transparent relative overflow-hidden">
+    return <section className="py-20 md:py-16 bg-transparent relative overflow-hidden">
         <div className="max-w-5xl mx-auto">
-          <div className="max-w-xl mx-auto py-[25px] mb-8 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
+          <div className="max-w-xl mx-auto py-[40px] md:py-[25px] mb-8 text-center">
+            <h2 className="text-2xl md:text-4xl font-bold mb-6 md:mb-4 text-white">
               Join a <span className="text-techstock-gold">world-class</span> network of successful investors
             </h2>
             
@@ -45,9 +47,9 @@ const JoinNetworkSection = () => {
   }
 
   // For higher power devices, render the full animation
-  return <section className="py-16 bg-transparent relative overflow-hidden">
-      <ContainerScroll titleComponent={<div className="max-w-xl mx-auto py-[25px]">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
+  return <section className="py-20 md:py-16 bg-transparent relative overflow-hidden">
+      <ContainerScroll titleComponent={<div className="max-w-xl mx-auto py-[40px] md:py-[25px]">
+          <h2 className="text-2xl md:text-4xl font-bold mb-6 md:mb-4 text-white">
             Join a <span className="text-techstock-gold">world-class</span> network of successful investors
           </h2>
           
