@@ -5,16 +5,21 @@ import AboutSection from '@/components/homepage/AboutSection';
 import TestimonialsSection from '@/components/homepage/TestimonialsSection';
 import NewsletterSection from '@/components/homepage/NewsletterSection';
 import CourseIndexSection from '@/components/homepage/CourseIndexSection';
+import JoinNetworkSection from '@/components/homepage/JoinNetworkSection';
 import { Link } from 'react-router-dom';
+import { BackgroundPaths } from '@/components/ui/background-paths';
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-black text-white relative">
+      {/* Background Animation */}
+      <BackgroundPaths />
+      
       {/* Hero Section */}
       <HeroSection />
       
       {/* Course Content Section - After Hero */}
-      <section className="py-16 bg-gradient-to-b from-techstock-black to-black">
+      <section className="py-16 relative">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Discover how to <span className="text-techstock-gold-light">invest</span> in stocks successfully</h2>
@@ -23,7 +28,7 @@ const Index = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
             {/* Feature 1 */}
-            <div className="bg-[#0D0D18] p-6 rounded-xl border border-techstock-gray/30 hover:border-techstock-gold transition-colors duration-300">
+            <div className="bg-[#0D0D18]/80 backdrop-blur-md p-6 rounded-xl border border-techstock-gray/30 hover:border-techstock-gold transition-colors duration-300">
               <div className="h-12 w-12 rounded-lg bg-techstock-gold/20 flex items-center justify-center mb-4">
                 <svg className="w-6 h-6 text-techstock-gold-light" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
@@ -34,7 +39,7 @@ const Index = () => {
             </div>
             
             {/* Feature 2 */}
-            <div className="bg-[#0D0D18] p-6 rounded-xl border border-techstock-gray/30 hover:border-techstock-gold transition-colors duration-300">
+            <div className="bg-[#0D0D18]/80 backdrop-blur-md p-6 rounded-xl border border-techstock-gray/30 hover:border-techstock-gold transition-colors duration-300">
               <div className="h-12 w-12 rounded-lg bg-techstock-gold/20 flex items-center justify-center mb-4">
                 <svg className="w-6 h-6 text-techstock-gold-light" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
@@ -45,7 +50,7 @@ const Index = () => {
             </div>
             
             {/* Feature 3 */}
-            <div className="bg-[#0D0D18] p-6 rounded-xl border border-techstock-gray/30 hover:border-techstock-gold transition-colors duration-300">
+            <div className="bg-[#0D0D18]/80 backdrop-blur-md p-6 rounded-xl border border-techstock-gray/30 hover:border-techstock-gold transition-colors duration-300">
               <div className="h-12 w-12 rounded-lg bg-techstock-gold/20 flex items-center justify-center mb-4">
                 <svg className="w-6 h-6 text-techstock-gold-light" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
@@ -70,7 +75,10 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Course Index Section - New component */}
+      {/* Join Network Section - NEW */}
+      <JoinNetworkSection />
+      
+      {/* Course Index Section */}
       <CourseIndexSection />
       
       {/* About the Instructor Section */}
@@ -80,7 +88,7 @@ const Index = () => {
       <TestimonialsSection />
       
       {/* Pricing Section */}
-      <section id="pricing" className="py-16 bg-black">
+      <section id="pricing" className="py-16 bg-transparent relative">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Investment <span className="text-techstock-gold-light">Plan</span></h2>
@@ -89,7 +97,7 @@ const Index = () => {
           
           <div className="max-w-lg mx-auto">
             {/* Premium Plan */}
-            <div className="bg-[#0D0D18] border-2 border-techstock-gold rounded-xl overflow-hidden relative transition-all duration-300 hover:transform hover:scale-105">
+            <div className="bg-[#0D0D18]/80 backdrop-blur-md border-2 border-techstock-gold rounded-xl overflow-hidden relative transition-all duration-300 hover:transform hover:scale-105">
               <div className="p-6">
                 <h3 className="text-xl font-bold mb-2 text-white">TechStock Goldmine Course</h3>
                 <div className="text-3xl font-bold text-white mb-4">$350 <span className="text-sm font-normal text-gray-400">/ one-time payment</span></div>
@@ -141,7 +149,7 @@ const Index = () => {
       <NewsletterSection />
       
       {/* Footer */}
-      <footer className="py-10 bg-black border-t border-techstock-gray/20">
+      <footer className="py-10 bg-transparent border-t border-techstock-gray/20">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-6 md:mb-0">
