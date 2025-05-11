@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { HeroSection } from '@/components/ui/galaxy-interactive-hero-section';
 import AboutSection from '@/components/homepage/AboutSection';
 import TestimonialsSection from '@/components/homepage/TestimonialsSection';
@@ -10,6 +10,19 @@ import { Link } from 'react-router-dom';
 import { BackgroundPaths } from '@/components/ui/background-paths';
 
 const Index = () => {
+  // Preload the video for better performance
+  useEffect(() => {
+    const videoPreload = document.createElement('link');
+    videoPreload.rel = 'preload';
+    videoPreload.href = '/assets/space-background.mp4';
+    videoPreload.as = 'video';
+    document.head.appendChild(videoPreload);
+    
+    return () => {
+      document.head.removeChild(videoPreload);
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-black text-white relative">
       {/* Background Animation */}
