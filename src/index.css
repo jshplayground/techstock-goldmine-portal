@@ -95,7 +95,11 @@
     @apply border-border;
   }
 
+  html, body {
+    @apply bg-black text-foreground min-h-screen;
+  }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-black text-foreground;
   }
 }

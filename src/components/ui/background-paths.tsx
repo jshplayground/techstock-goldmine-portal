@@ -7,8 +7,8 @@ import { useDeviceCapability } from "@/hooks/useDeviceCapability";
 function FloatingPaths({ position }: { position: number }) {
     const { isMobile, isLowPowerDevice } = useDeviceCapability();
     
-    // Reduce the number of paths on mobile and low power devices
-    const pathCount = isLowPowerDevice ? 12 : (isMobile ? 24 : 48);
+    // Significantly reduce the number of paths on mobile and low power devices
+    const pathCount = isLowPowerDevice ? 6 : (isMobile ? 12 : 36);
     
     const paths = Array.from({ length: pathCount }, (_, i) => ({
         id: i,
@@ -32,8 +32,8 @@ function FloatingPaths({ position }: { position: number }) {
                 className="w-full h-full text-techstock-gold/50"
                 viewBox="0 0 696 316"
                 fill="none"
+                aria-hidden="true"
             >
-                <title>Background Paths</title>
                 {paths.map((path) => (
                     <motion.path
                         key={path.id}
@@ -50,7 +50,7 @@ function FloatingPaths({ position }: { position: number }) {
                             opacity: 0.5
                         }}
                         transition={shouldAnimate ? {
-                            duration: isMobile ? 24 : 18 + Math.random() * 8, 
+                            duration: isMobile ? 30 : 18 + Math.random() * 8, 
                             repeat: Number.POSITIVE_INFINITY,
                             ease: "linear",
                         } : {}}
@@ -66,11 +66,11 @@ export function BackgroundPaths() {
 
     // On low power devices, we render fewer elements
     return (
-        <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+        <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden bg-black">
             <FloatingPaths position={1} />
             {!isLowPowerDevice && <FloatingPaths position={-1} />}
             
-            {/* Additional set of paths - skip for low power devices */}
+            {/* Skip additional paths for low power devices */}
             {!isLowPowerDevice && (
                 <div className="opacity-60 blur-[1px]">
                     <FloatingPaths position={0.7} />
