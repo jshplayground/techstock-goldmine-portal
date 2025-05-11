@@ -9,7 +9,6 @@ import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Course from "./pages/dashboard/Course";
-import AI from "./pages/dashboard/AI";
 
 // Placeholder para las páginas que implementaremos después
 const PlaceholderPage = ({ title }: { title: string }) => (
@@ -35,7 +34,7 @@ const App = () => (
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/dashboard/course" element={<Course />} />
           <Route path="/dashboard/test" element={<PlaceholderPage title="Test de Conocimientos" />} />
-          <Route path="/dashboard/ai" element={<AI />} />
+          <Route path="/dashboard/ai" element={<PlaceholderPage title="Habla con Antonio IA" />} />
           <Route path="/dashboard/analyzer" element={<PlaceholderPage title="Analizador de Acciones" />} />
           <Route path="/dashboard/portfolio" element={<PlaceholderPage title="Tu Cartera" />} />
           <Route path="*" element={<NotFound />} />
