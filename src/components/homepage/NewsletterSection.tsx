@@ -12,11 +12,11 @@ const NewsletterSection = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulamos el envío del formulario
+    // Simulate form submission
     setTimeout(() => {
       setIsSubmitting(false);
       setEmail('');
-      toast.success('¡Gracias por suscribirte! Recibirás nuestras actualizaciones pronto.', {
+      toast.success('Thanks for subscribing! You will receive our updates soon.', {
         duration: 5000,
       });
     }, 1500);
@@ -24,19 +24,19 @@ const NewsletterSection = () => {
 
   return (
     <section id="newsletter" className="py-16 bg-techstock-black relative overflow-hidden">
-      {/* Elementos decorativos de fondo */}
+      {/* Decorative background elements */}
       <div className="absolute -top-20 -right-20 w-64 h-64 bg-techstock-purple/10 rounded-full blur-3xl"></div>
       <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-techstock-purple/5 rounded-full blur-3xl"></div>
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Mantente <span className="text-techstock-purple-light">actualizado</span></h2>
-          <p className="text-gray-300 mb-8">Suscríbete para recibir los últimos consejos de inversión, análisis de empresas y actualizaciones exclusivas del curso.</p>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Stay <span className="text-techstock-purple-light">updated</span></h2>
+          <p className="text-gray-300 mb-8">Subscribe to receive the latest investment tips, company analysis, and exclusive course updates.</p>
           
           <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
             <Input
               type="email"
-              placeholder="Tu correo electrónico"
+              placeholder="Your email address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -53,13 +53,13 @@ const NewsletterSection = () => {
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                   </svg>
-                  Enviando...
+                  Sending...
                 </>
-              ) : "Suscribirse"}
+              ) : "Subscribe"}
             </Button>
           </form>
           
-          <p className="mt-4 text-xs text-gray-400">Respetamos tu privacidad. No compartiremos tu información con terceros.</p>
+          <p className="mt-4 text-xs text-gray-400">We respect your privacy. We will not share your information with third parties.</p>
         </div>
       </div>
     </section>

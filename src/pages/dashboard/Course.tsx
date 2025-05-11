@@ -4,7 +4,6 @@ import Sidebar from '@/components/dashboard/Sidebar';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Card, CardContent } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 interface Module {
@@ -27,71 +26,71 @@ const Course = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [activeModule, setActiveModule] = useState<number>(1);
   
-  // Datos de ejemplo para el curso
+  // Example course data
   const modules: Module[] = [
     {
       id: 1,
-      title: "Fundamentos del Análisis Probabilístico",
-      description: "Introducción a los conceptos principales y metodología de análisis.",
+      title: "Fundamentals of Probabilistic Analysis",
+      description: "Introduction to key concepts and analysis methodology.",
       duration: "1h 45min",
       progress: 100,
       lessons: [
-        { id: 1, title: "Introducción al curso", duration: "15min", completed: true },
-        { id: 2, title: "Metodología de inversión", duration: "30min", completed: true },
-        { id: 3, title: "El concepto de algoritmo", duration: "25min", completed: true },
-        { id: 4, title: "Mitos y verdades en la inversión en bolsa", duration: "35min", completed: true }
+        { id: 1, title: "Course introduction", duration: "15min", completed: true },
+        { id: 2, title: "Investment methodology", duration: "30min", completed: true },
+        { id: 3, title: "The algorithm concept", duration: "25min", completed: true },
+        { id: 4, title: "Myths and truths in stock investing", duration: "35min", completed: true }
       ]
     },
     {
       id: 2,
-      title: "El Algoritmo Costco",
-      description: "Aprende el patrón y las características del algoritmo fundamental.",
+      title: "The Costco Algorithm",
+      description: "Learn the pattern and characteristics of the fundamental algorithm.",
       duration: "2h 10min",
       progress: 50,
       lessons: [
-        { id: 5, title: "Introducción al Algoritmo Costco", duration: "25min", completed: true },
-        { id: 6, title: "Características principales", duration: "40min", completed: true },
-        { id: 7, title: "Casos prácticos y ejemplos", duration: "35min", completed: false },
-        { id: 8, title: "Aplicación y limitaciones", duration: "30min", completed: false }
+        { id: 5, title: "Introduction to the Costco Algorithm", duration: "25min", completed: true },
+        { id: 6, title: "Key characteristics", duration: "40min", completed: true },
+        { id: 7, title: "Practical cases and examples", duration: "35min", completed: false },
+        { id: 8, title: "Application and limitations", duration: "30min", completed: false }
       ]
     },
     {
       id: 3,
-      title: "KPIs para compañías tech de alto crecimiento",
-      description: "Los indicadores clave que debes monitorear para evaluar oportunidades de inversión.",
+      title: "KPIs for high-growth tech companies",
+      description: "The key indicators you should monitor to evaluate investment opportunities.",
       duration: "1h 55min",
       progress: 0,
       lessons: [
-        { id: 9, title: "KPIs fundamentales", duration: "30min", completed: false },
-        { id: 10, title: "Métricas de crecimiento", duration: "25min", completed: false },
-        { id: 11, title: "Indicadores de rentabilidad", duration: "30min", completed: false },
-        { id: 12, title: "Métricas específicas para cada sector tech", duration: "30min", completed: false }
+        { id: 9, title: "Fundamental KPIs", duration: "30min", completed: false },
+        { id: 10, title: "Growth metrics", duration: "25min", completed: false },
+        { id: 11, title: "Profitability indicators", duration: "30min", completed: false },
+        { id: 12, title: "Sector-specific metrics for tech", duration: "30min", completed: false }
       ]
     },
     {
       id: 4,
-      title: "Valoración de empresas tecnológicas",
-      description: "Métodos de valoración adaptados a las peculiaridades de las empresas tech.",
+      title: "Technology Company Valuation",
+      description: "Valuation methods adapted to the peculiarities of tech companies.",
       duration: "2h 20min",
       progress: 0,
       lessons: [
-        { id: 13, title: "Introducción a los métodos de valoración", duration: "25min", completed: false },
-        { id: 14, title: "Flujos de caja descontados", duration: "35min", completed: false },
-        { id: 15, title: "Múltiplos y comparables", duration: "30min", completed: false },
-        { id: 16, title: "El método probabilístico", duration: "50min", completed: false }
+        { id: 13, title: "Introduction to valuation methods", duration: "25min", completed: false },
+        { id: 14, title: "Discounted cash flows", duration: "35min", completed: false },
+        { id: 15, title: "Multiples and comparables", duration: "30min", completed: false },
+        { id: 16, title: "The probabilistic method", duration: "50min", completed: false }
       ]
     },
     {
       id: 5,
-      title: "Gestión de la volatilidad y el riesgo",
-      description: "Cómo gestionar la volatilidad inherente a las acciones tecnológicas.",
+      title: "Volatility and Risk Management",
+      description: "How to manage the inherent volatility in technology stocks.",
       duration: "1h 40min",
       progress: 0,
       lessons: [
-        { id: 17, title: "Entendiendo la volatilidad", duration: "20min", completed: false },
-        { id: 18, title: "Herramientas para gestionar el riesgo", duration: "30min", completed: false },
-        { id: 19, title: "Construcción de una cartera robusta", duration: "25min", completed: false },
-        { id: 20, title: "Psicología del inversor", duration: "25min", completed: false }
+        { id: 17, title: "Understanding volatility", duration: "20min", completed: false },
+        { id: 18, title: "Risk management tools", duration: "30min", completed: false },
+        { id: 19, title: "Building a robust portfolio", duration: "25min", completed: false },
+        { id: 20, title: "Investor psychology", duration: "25min", completed: false }
       ]
     }
   ];
@@ -108,10 +107,10 @@ const Course = () => {
         {/* Header */}
         <header className="bg-[#0D0D18] border-b border-techstock-gray/30 p-4">
           <div className="flex justify-between items-center">
-            <h1 className="text-xl font-bold text-white">TechStock Goldmine - El Curso</h1>
+            <h1 className="text-xl font-bold text-white">TechStock Goldmine - The Course</h1>
             <div className="flex items-center gap-2">
               <div className="text-sm text-gray-400">
-                <span className="font-medium text-white">{completedLessons}</span> / {totalLessons} lecciones completadas
+                <span className="font-medium text-white">{completedLessons}</span> / {totalLessons} lessons completed
               </div>
             </div>
           </div>
@@ -122,20 +121,20 @@ const Course = () => {
           </div>
         </header>
         
-        {/* Contenido principal */}
+        {/* Main content */}
         <main className="p-6">
           <Tabs defaultValue="modules" className="w-full">
             <TabsList className="grid w-full md:w-[400px] grid-cols-2 mb-6 bg-[#0D0D18]">
-              <TabsTrigger value="modules" className="data-[state=active]:bg-techstock-purple data-[state=active]:text-white">Módulos</TabsTrigger>
-              <TabsTrigger value="resources" className="data-[state=active]:bg-techstock-purple data-[state=active]:text-white">Recursos</TabsTrigger>
+              <TabsTrigger value="modules" className="data-[state=active]:bg-techstock-purple data-[state=active]:text-white">Modules</TabsTrigger>
+              <TabsTrigger value="resources" className="data-[state=active]:bg-techstock-purple data-[state=active]:text-white">Resources</TabsTrigger>
             </TabsList>
             
             <TabsContent value="modules">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {/* Lista de módulos */}
+                {/* Module list */}
                 <div className="col-span-1 bg-[#0D0D18] border border-techstock-gray/30 rounded-lg overflow-hidden">
                   <div className="p-4 border-b border-techstock-gray/30">
-                    <h2 className="font-bold text-white">Módulos del curso</h2>
+                    <h2 className="font-bold text-white">Course modules</h2>
                   </div>
                   <div className="overflow-y-auto max-h-[calc(100vh-240px)]">
                     {modules.map((module) => (
@@ -152,7 +151,7 @@ const Course = () => {
                         </div>
                         
                         <div className="mt-1 text-xs text-gray-400 flex justify-between">
-                          <span>{module.lessons.length} lecciones</span>
+                          <span>{module.lessons.length} lessons</span>
                           <span>{module.duration}</span>
                         </div>
                         
@@ -166,9 +165,9 @@ const Course = () => {
                   </div>
                 </div>
                 
-                {/* Contenido del módulo */}
+                {/* Module content */}
                 <div className="col-span-1 md:col-span-2 bg-[#0D0D18] border border-techstock-gray/30 rounded-lg overflow-hidden">
-                  {/* Detalles del módulo */}
+                  {/* Module details */}
                   <div className="p-6 border-b border-techstock-gray/30">
                     <h2 className="text-xl font-bold text-white">{modules[activeModule - 1].title}</h2>
                     <p className="mt-2 text-gray-300">{modules[activeModule - 1].description}</p>
@@ -186,7 +185,7 @@ const Course = () => {
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                         </svg>
                         <span>
-                          {modules[activeModule - 1].lessons.filter(lesson => lesson.completed).length} / {modules[activeModule - 1].lessons.length} lecciones completadas
+                          {modules[activeModule - 1].lessons.filter(lesson => lesson.completed).length} / {modules[activeModule - 1].lessons.length} lessons completed
                         </span>
                       </div>
                       
@@ -194,14 +193,14 @@ const Course = () => {
                         <svg className="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <span>Nivel: Intermedio</span>
+                        <span>Level: Intermediate</span>
                       </div>
                     </div>
                   </div>
                   
-                  {/* Lista de lecciones */}
+                  {/* Lessons list */}
                   <div className="p-6">
-                    <h3 className="font-bold text-white mb-4">Lecciones</h3>
+                    <h3 className="font-bold text-white mb-4">Lessons</h3>
                     
                     <div className="space-y-3">
                       {modules[activeModule - 1].lessons.map((lesson) => (
@@ -230,7 +229,7 @@ const Course = () => {
                               size="sm"
                               className={`${lesson.completed ? 'text-green-500 border-green-500/30 hover:border-green-500' : 'text-techstock-purple-light border-techstock-purple/30 hover:border-techstock-purple'}`}
                             >
-                              {lesson.completed ? "Repasar" : "Comenzar"}
+                              {lesson.completed ? "Review" : "Start"}
                             </Button>
                           </CardContent>
                         </Card>
@@ -243,16 +242,16 @@ const Course = () => {
             
             <TabsContent value="resources">
               <div className="bg-[#0D0D18] border border-techstock-gray/30 rounded-lg p-6">
-                <h2 className="text-xl font-bold text-white mb-6">Recursos del curso</h2>
+                <h2 className="text-xl font-bold text-white mb-6">Course resources</h2>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {/* Libros recomendados */}
+                  {/* Recommended books */}
                   <div>
                     <h3 className="font-bold text-white mb-4 flex items-center">
                       <svg className="w-5 h-5 mr-2 text-techstock-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                       </svg>
-                      Libros recomendados
+                      Recommended books
                     </h3>
                     
                     <div className="space-y-4">
@@ -260,7 +259,7 @@ const Course = () => {
                         <CardContent className="p-4">
                           <h4 className="font-medium text-white">100 Baggers</h4>
                           <p className="text-sm text-gray-400">Christopher W. Mayer</p>
-                          <p className="text-xs text-gray-500 mt-1">Cómo encontrar acciones que se multipliquen por 100 en un ciclo de mercado completo</p>
+                          <p className="text-xs text-gray-500 mt-1">How to find stocks that multiply by 100 in one complete market cycle</p>
                         </CardContent>
                       </Card>
                       
@@ -268,7 +267,7 @@ const Course = () => {
                         <CardContent className="p-4">
                           <h4 className="font-medium text-white">The Psychology of Money</h4>
                           <p className="text-sm text-gray-400">Morgan Housel</p>
-                          <p className="text-xs text-gray-500 mt-1">Lecciones atemporales sobre riqueza, codicia y felicidad</p>
+                          <p className="text-xs text-gray-500 mt-1">Timeless lessons on wealth, greed, and happiness</p>
                         </CardContent>
                       </Card>
                       
@@ -276,26 +275,26 @@ const Course = () => {
                         <CardContent className="p-4">
                           <h4 className="font-medium text-white">Common Stocks and Uncommon Profits</h4>
                           <p className="text-sm text-gray-400">Philip A. Fisher</p>
-                          <p className="text-xs text-gray-500 mt-1">Análisis cualitativo para inversiones en empresas de alto crecimiento</p>
+                          <p className="text-xs text-gray-500 mt-1">Qualitative analysis for investments in high-growth companies</p>
                         </CardContent>
                       </Card>
                     </div>
                   </div>
                   
-                  {/* Archivos descargables */}
+                  {/* Downloadable files */}
                   <div>
                     <h3 className="font-bold text-white mb-4 flex items-center">
                       <svg className="w-5 h-5 mr-2 text-techstock-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                       </svg>
-                      Archivos descargables
+                      Downloadable files
                     </h3>
                     
                     <div className="space-y-4">
                       <Card className="bg-[#0D0D18] border-techstock-gray/30 hover:border-techstock-purple transition-colors duration-300">
                         <CardContent className="p-4 flex justify-between items-center">
                           <div>
-                            <h4 className="font-medium text-white">Plantilla de análisis fundamental</h4>
+                            <h4 className="font-medium text-white">Fundamental analysis template</h4>
                             <p className="text-xs text-gray-400">Excel, 2.3 MB</p>
                           </div>
                           <Button variant="outline" size="sm" className="text-techstock-purple-light border-techstock-purple/30 hover:border-techstock-purple">
@@ -309,7 +308,7 @@ const Course = () => {
                       <Card className="bg-[#0D0D18] border-techstock-gray/30 hover:border-techstock-purple transition-colors duration-300">
                         <CardContent className="p-4 flex justify-between items-center">
                           <div>
-                            <h4 className="font-medium text-white">Checklist de inversión probabilística</h4>
+                            <h4 className="font-medium text-white">Probabilistic investment checklist</h4>
                             <p className="text-xs text-gray-400">PDF, 1.5 MB</p>
                           </div>
                           <Button variant="outline" size="sm" className="text-techstock-purple-light border-techstock-purple/30 hover:border-techstock-purple">
@@ -323,7 +322,7 @@ const Course = () => {
                       <Card className="bg-[#0D0D18] border-techstock-gray/30 hover:border-techstock-purple transition-colors duration-300">
                         <CardContent className="p-4 flex justify-between items-center">
                           <div>
-                            <h4 className="font-medium text-white">Diapositivas del curso</h4>
+                            <h4 className="font-medium text-white">Course slides</h4>
                             <p className="text-xs text-gray-400">PowerPoint, 8.7 MB</p>
                           </div>
                           <Button variant="outline" size="sm" className="text-techstock-purple-light border-techstock-purple/30 hover:border-techstock-purple">
@@ -337,7 +336,7 @@ const Course = () => {
                       <Card className="bg-[#0D0D18] border-techstock-gray/30 hover:border-techstock-purple transition-colors duration-300">
                         <CardContent className="p-4 flex justify-between items-center">
                           <div>
-                            <h4 className="font-medium text-white">Guía de análisis técnico</h4>
+                            <h4 className="font-medium text-white">Technical analysis guide</h4>
                             <p className="text-xs text-gray-400">PDF, 3.2 MB</p>
                           </div>
                           <Button variant="outline" size="sm" className="text-techstock-purple-light border-techstock-purple/30 hover:border-techstock-purple">
