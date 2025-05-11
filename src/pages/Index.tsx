@@ -4,6 +4,7 @@ import { HeroSection } from '@/components/ui/galaxy-interactive-hero-section';
 import AboutSection from '@/components/homepage/AboutSection';
 import TestimonialsSection from '@/components/homepage/TestimonialsSection';
 import NewsletterSection from '@/components/homepage/NewsletterSection';
+import CourseIndexSection from '@/components/homepage/CourseIndexSection';
 import { Link } from 'react-router-dom';
 
 const Index = () => {
@@ -68,6 +69,9 @@ const Index = () => {
           </div>
         </div>
       </section>
+      
+      {/* Course Index Section - Nuevo componente */}
+      <CourseIndexSection />
       
       {/* Sección Sobre el Instructor */}
       <AboutSection />
