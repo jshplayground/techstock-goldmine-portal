@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { useDeviceCapability } from '@/hooks/useDeviceCapability';
-import { AnimatedSection } from '@/components/ui/animated-section';
 
 const AboutSection = () => {
   const { isLowPowerDevice } = useDeviceCapability();
@@ -15,15 +14,15 @@ const AboutSection = () => {
     <section id="about" className="py-16 bg-techstock-black">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center gap-10">
-          <AnimatedSection animation="slide-right" className="md:w-1/2 relative z-10">
+          <div className="md:w-1/2 relative z-10">
             <img 
               src="https://cdn.fs.teachablecdn.com/Jmyo40zFS2qUQbthP9Io" 
               alt="Antonio Linares" 
               className="rounded-xl shadow-2xl border border-techstock-gray/30 max-w-full"
-              loading="lazy"
+              loading="lazy" // Add lazy loading for images
             />
-          </AnimatedSection>
-          <AnimatedSection delay={0.2} animation="slide-up" className="md:w-1/2 text-gray-100">
+          </div>
+          <div className="md:w-1/2 text-gray-100">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">About <span className="text-techstock-purple-light">Antonio Linares</span></h2>
             <div className="space-y-4 text-gray-300">
               <p>Version 2 of the course is now available, with improvements based on feedback from almost 300 students.</p>
@@ -41,13 +40,13 @@ const AboutSection = () => {
               <div className="pt-4">
                 <a 
                   href="#pricing" 
-                  className={`${cardClassName.replace("bg-[#0D0D18]", "bg-techstock-purple").replace("bg-[#0D0D18]/80", "bg-techstock-purple")} px-6 py-3 rounded-full text-white inline-block`}
+                  className={cardClassName.replace("bg-[#0D0D18]", "bg-techstock-purple").replace("bg-[#0D0D18]/80", "bg-techstock-purple")}
                 >
                   Learn more
                 </a>
               </div>
             </div>
-          </AnimatedSection>
+          </div>
         </div>
       </div>
     </section>

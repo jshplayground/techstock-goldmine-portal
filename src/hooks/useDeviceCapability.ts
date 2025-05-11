@@ -5,7 +5,6 @@ export interface DeviceCapability {
   isLowPowerDevice: boolean;
   isMobile: boolean;
   prefersReducedMotion: boolean;
-  isOlderDevice: boolean;
 }
 
 export function useDeviceCapability(): DeviceCapability {
@@ -13,27 +12,26 @@ export function useDeviceCapability(): DeviceCapability {
     isLowPowerDevice: false,
     isMobile: false,
     prefersReducedMotion: false,
-    isOlderDevice: false,
   });
 
   useEffect(() => {
     // Check if device is mobile
-    const checkIsMobile = () => window.innerWidth < 768;
-    const isMobile = checkIsMobile();
+    const isMobile = window.innerWidth < 768;
     
     // Check if device is likely low power (simplified heuristic)
-    let isOlderDevice = false;
+    // This is a more conservative approach that only marks truly low-end devices
+    let isLowPowerDevice = false;
     
-    // Check user agent for older devices that might struggle with animations/video
+    // Check user agent for older devices that might struggle with video
     const userAgent = navigator.userAgent;
-    isOlderDevice = 
+    const isOlderDevice = 
       /Android (4|5|6)/.test(userAgent) ||
       /iPhone (5|6|7|8)/.test(userAgent) ||
       /iPad (?!Pro)/.test(userAgent);
-    
-    // Consider device as low power if it's older or has low memory
-    // Modern mobile devices should be capable of handling video playback
-    const isLowPowerDevice = isOlderDevice;
+      
+    if (isOlderDevice) {
+      isLowPowerDevice = true;
+    }
 
     // Check if user prefers reduced motion
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -42,13 +40,12 @@ export function useDeviceCapability(): DeviceCapability {
       isLowPowerDevice,
       isMobile,
       prefersReducedMotion,
-      isOlderDevice
     });
 
     const handleResize = () => {
       setCapability(prev => ({
         ...prev,
-        isMobile: checkIsMobile()
+        isMobile: window.innerWidth < 768
       }));
     };
 
