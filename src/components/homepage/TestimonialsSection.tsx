@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { TestimonialsSection as TestimonialMarquee } from '@/components/blocks/testimonials-with-marquee';
+import { OptimizedTestimonialsSection } from '@/components/blocks/optimized-testimonials';
 
 // Testimonial data
 const testimonials = [
@@ -41,7 +41,7 @@ const testimonials = [
 const TestimonialsSection = () => {
   return (
     <section id="testimonials" className="py-16 bg-transparent relative">
-      <TestimonialMarquee 
+      <OptimizedTestimonialsSection
         title="What our students say"
         description="Join thousands of successful investors who have transformed their investment approach with TechStock Goldmine"
         testimonials={testimonials}

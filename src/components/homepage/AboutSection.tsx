@@ -1,7 +1,15 @@
 
 import React from 'react';
+import { useDeviceCapability } from '@/hooks/useDeviceCapability';
 
 const AboutSection = () => {
+  const { isLowPowerDevice } = useDeviceCapability();
+
+  // Simplified card style for low power devices - remove backdrop blur
+  const cardClassName = isLowPowerDevice 
+    ? "bg-[#0D0D18] border border-techstock-gray/30 hover:border-techstock-gold transition-colors duration-300"
+    : "bg-[#0D0D18]/80 backdrop-blur-md border border-techstock-gray/30 hover:border-techstock-gold transition-colors duration-300";
+
   return (
     <section id="about" className="py-16 bg-techstock-black">
       <div className="container mx-auto px-4">
@@ -11,6 +19,7 @@ const AboutSection = () => {
               src="https://cdn.fs.teachablecdn.com/Jmyo40zFS2qUQbthP9Io" 
               alt="Antonio Linares" 
               className="rounded-xl shadow-2xl border border-techstock-gray/30 max-w-full"
+              loading="lazy" // Add lazy loading for images
             />
           </div>
           <div className="md:w-1/2 text-gray-100">
@@ -31,7 +40,7 @@ const AboutSection = () => {
               <div className="pt-4">
                 <a 
                   href="#pricing" 
-                  className="bg-techstock-purple hover:bg-techstock-purple-dark text-white font-semibold py-3 px-8 rounded-full transition duration-300"
+                  className={cardClassName.replace("bg-[#0D0D18]", "bg-techstock-purple").replace("bg-[#0D0D18]/80", "bg-techstock-purple")}
                 >
                   Learn more
                 </a>

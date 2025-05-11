@@ -1,15 +1,20 @@
-
 "use client";
 
 import React, { useEffect, useRef, useState } from 'react';
 import { Suspense, lazy } from 'react';
 import { Link } from 'react-router-dom';
 import { Youtube } from "lucide-react";
+import { OptimizedVideoBackground } from './optimized-video-background';
+import { useDeviceCapability } from '@/hooks/useDeviceCapability';
 
 export const HeroSection = () => {
   const heroContentRef = useRef<HTMLDivElement>(null);
+  const { isLowPowerDevice } = useDeviceCapability();
 
   useEffect(() => {
+    // Skip fade effect on scroll for low power devices
+    if (isLowPowerDevice) return;
+    
     const handleScroll = () => {
       if (heroContentRef.current) {
         requestAnimationFrame(() => {
@@ -24,26 +29,15 @@ export const HeroSection = () => {
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isLowPowerDevice]);
 
   return (
     <div className="relative">
       <Navbar />
 
       <div className="relative min-h-screen">
-        {/* YouTube Video Background */}
-        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-          <div className="relative w-full h-full">
-            <iframe 
-              src="https://www.youtube.com/embed/XQe81I0SAho?autoplay=1&mute=1&controls=0&loop=1&playlist=XQe81I0SAho&playsinline=1&rel=0&showinfo=0&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0" 
-              allow="autoplay; encrypted-media" 
-              className="absolute w-[300%] md:w-[200%] lg:w-[150%] xl:w-full h-[150%] sm:h-[130%] md:h-full -top-[25%] sm:-top-[15%] md:top-0 -left-[100%] md:-left-[50%] lg:-left-[25%] xl:left-0 pointer-events-none"
-              style={{ filter: 'brightness(0.5)' }}
-            ></iframe>
-            <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black"></div>
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black"></div>
-          </div>
-        </div>
+        {/* Optimized Video/Image Background */}
+        <OptimizedVideoBackground videoId="XQe81I0SAho" />
 
         <div ref={heroContentRef} style={{
           position: 'absolute', top: 0, left: 0, width: '100%', height: '100vh',
