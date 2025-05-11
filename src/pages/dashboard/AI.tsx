@@ -1,6 +1,5 @@
 
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
 
 const AI = () => {
