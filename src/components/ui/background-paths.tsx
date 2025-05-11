@@ -5,29 +5,41 @@ import { motion } from "framer-motion";
 import { useDeviceCapability } from "@/hooks/useDeviceCapability";
 
 function FloatingPaths({ position }: { position: number }) {
-    const { isMobile, isLowPowerDevice } = useDeviceCapability();
+    const { isMobile, isLowPowerDevice, prefersReducedMotion } = useDeviceCapability();
     
-    // Significantly reduce the number of paths on mobile and low power devices
-    const pathCount = isLowPowerDevice ? 6 : (isMobile ? 12 : 36);
+    // Further reduce the number of paths
+    const pathCount = isLowPowerDevice ? 4 : (isMobile ? 8 : 24);
     
-    const paths = Array.from({ length: pathCount }, (_, i) => ({
-        id: i,
-        d: `M-${380 - i * 5 * position} -${189 + i * 6}C-${
-            380 - i * 5 * position
-        } -${189 + i * 6} -${312 - i * 5 * position} ${216 - i * 6} ${
-            152 - i * 5 * position
-        } ${343 - i * 6}C${616 - i * 5 * position} ${470 - i * 6} ${
-            684 - i * 5 * position
-        } ${875 - i * 6} ${684 - i * 5 * position} ${875 - i * 6}`,
-        color: `rgba(245, 166, 35, ${0.08 + i * 0.015})`, 
-        width: 0.8 + i * 0.05,
-    }));
+    // Calculate paths with optimized values
+    const paths = Array.from({ length: pathCount }, (_, i) => {
+        // Simplify path calculation for better performance
+        const offset = i * (isLowPowerDevice ? 10 : 5) * position;
+        return {
+            id: i,
+            d: `M-${380 - offset} -${189 + i * 6}C-${
+                380 - offset
+            } -${189 + i * 6} -${312 - offset} ${216 - i * 6} ${
+                152 - offset
+            } ${343 - i * 6}C${616 - offset} ${470 - i * 6} ${
+                684 - offset
+            } ${875 - i * 6} ${684 - offset} ${875 - i * 6}`,
+            color: `rgba(245, 166, 35, ${0.08 + i * 0.015})`, 
+            width: 0.8 + i * 0.03,  // Reduced thickness growth
+        };
+    });
 
-    // Skip animations on low power devices
-    const shouldAnimate = !isLowPowerDevice;
+    // Skip animations for reduced motion preference or low power
+    const shouldAnimate = !isLowPowerDevice && !prefersReducedMotion;
+
+    // Simpler, faster animation
+    const getAnimationDuration = () => {
+        if (isLowPowerDevice) return 0; // No animation
+        if (isMobile) return 12 + Math.random() * 3; // Shorter on mobile
+        return 15 + Math.random() * 5; // Shorter on desktop too
+    };
 
     return (
-        <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 pointer-events-none opacity-60">
             <svg
                 className="w-full h-full text-techstock-gold/50"
                 viewBox="0 0 696 316"
@@ -40,20 +52,22 @@ function FloatingPaths({ position }: { position: number }) {
                         d={path.d}
                         stroke="currentColor"
                         strokeWidth={path.width}
-                        strokeOpacity={0.2 + path.id * 0.015}
-                        initial={shouldAnimate ? { pathLength: 0.3, opacity: 0.5 } : { opacity: 0.5 }}
+                        strokeOpacity={0.2 + path.id * 0.01}  // Reduced opacity growth
+                        initial={shouldAnimate ? { pathLength: 0.3, opacity: 0.4 } : { opacity: 0.4 }}
                         animate={shouldAnimate ? {
-                            pathLength: 1,
-                            opacity: [0.3, 0.6, 0.3],
-                            pathOffset: [0, 1, 0],
+                            pathLength: [0.3, 0.6, 0.3],  // Simplified animation
+                            opacity: [0.3, 0.4, 0.3],
                         } : {
-                            opacity: 0.5
+                            opacity: 0.4
                         }}
                         transition={shouldAnimate ? {
-                            duration: isMobile ? 30 : 18 + Math.random() * 8, 
+                            duration: getAnimationDuration(),
                             repeat: Number.POSITIVE_INFINITY,
                             ease: "linear",
                         } : {}}
+                        style={{
+                            willChange: "opacity, stroke-dashoffset",  // Performance hint
+                        }}
                     />
                 ))}
             </svg>
@@ -62,21 +76,15 @@ function FloatingPaths({ position }: { position: number }) {
 }
 
 export function BackgroundPaths() {
-    const { isLowPowerDevice } = useDeviceCapability();
+    const { isLowPowerDevice, isMobile } = useDeviceCapability();
 
-    // On low power devices, we render fewer elements
+    // Significantly reduced components for better performance
     return (
         <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden bg-black">
             <FloatingPaths position={1} />
-            {!isLowPowerDevice && <FloatingPaths position={-1} />}
             
-            {/* Skip additional paths for low power devices */}
-            {!isLowPowerDevice && (
-                <div className="opacity-60 blur-[1px]">
-                    <FloatingPaths position={0.7} />
-                    {!isLowPowerDevice && <FloatingPaths position={-0.7} />}
-                </div>
-            )}
+            {/* Only add additional layers when not a low power device */}
+            {!isLowPowerDevice && !isMobile && <FloatingPaths position={-1} />}
         </div>
     );
 }

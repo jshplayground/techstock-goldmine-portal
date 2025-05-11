@@ -1,5 +1,6 @@
 
 "use client";
+
 import React, { useRef } from "react";
 import { useScroll, useTransform, motion, MotionValue } from "framer-motion";
 import { useDeviceCapability } from "@/hooks/useDeviceCapability";
@@ -24,13 +25,13 @@ export const ContainerScroll = ({
   };
 
   // Use lighter animations for all devices to improve performance
-  const rotate = useTransform(scrollYProgress, [0, 1], [10, 0]);  // reduced from 20 to 10
+  const rotate = useTransform(scrollYProgress, [0, 1], [5, 0]);  // reduced from 10 to 5
   const scale = useTransform(scrollYProgress, [0, 1], scaleDimensions());
-  const translate = useTransform(scrollYProgress, [0, 1], [0, -50]); // reduced from -100 to -50
+  const translate = useTransform(scrollYProgress, [0, 1], [0, -25]); // reduced from -50 to -25
 
   return (
     <div
-      className="h-[50rem] md:h-[60rem] flex items-center justify-center relative p-2 md:p-20"
+      className="h-[30rem] md:h-[40rem] flex items-center justify-center relative p-2 md:p-20"
       ref={containerRef}
     >
       <div
@@ -76,9 +77,9 @@ export const Card = ({
   
   // For low power devices, use simpler shadow
   const shadowStyle = isLowPowerDevice 
-    ? { boxShadow: "0 10px 30px rgba(0, 0, 0, 0.3)" }
+    ? { boxShadow: "0 5px 15px rgba(0, 0, 0, 0.3)" }
     : { 
-        boxShadow: "0 0 #0000004d, 0 9px 20px #0000004a, 0 37px 37px #00000042, 0 84px 50px #00000026, 0 149px 60px #0000000a, 0 233px 65px #00000003"
+        boxShadow: "0 0 #0000004d, 0 9px 20px #0000004a, 0 37px 37px #00000042"
       };
   
   return (
@@ -86,9 +87,11 @@ export const Card = ({
       style={{
         rotateX: rotate,
         scale,
-        ...shadowStyle
+        ...shadowStyle,
+        willChange: "transform",
+        transform: "translateZ(0)"
       }}
-      className="max-w-5xl -mt-12 mx-auto h-[30rem] md:h-[40rem] w-full border-4 border-techstock-gold/30 p-2 md:p-6 bg-black/70 rounded-[30px] backdrop-blur-lg shadow-2xl"
+      className="max-w-5xl -mt-12 mx-auto h-[24rem] md:h-[30rem] w-full border-4 border-techstock-gold/30 p-2 md:p-6 bg-black/70 rounded-[30px] backdrop-blur-lg shadow-2xl"
     >
       <div className="h-full w-full overflow-hidden rounded-2xl bg-black/50 dark:bg-zinc-900/80 md:rounded-2xl md:p-4">
         {children}
