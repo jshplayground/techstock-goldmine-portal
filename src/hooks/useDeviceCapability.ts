@@ -6,6 +6,7 @@ export interface DeviceCapability {
   isMobile: boolean;
   prefersReducedMotion: boolean;
   connectionSpeed: 'slow' | 'medium' | 'fast';
+  isMidRangeDevice?: boolean; // Add this property
 }
 
 export function useDeviceCapability(): DeviceCapability {
@@ -14,6 +15,7 @@ export function useDeviceCapability(): DeviceCapability {
     isMobile: false,
     prefersReducedMotion: false,
     connectionSpeed: 'medium',
+    isMidRangeDevice: false, // Set default value
   });
 
   useEffect(() => {
@@ -44,18 +46,28 @@ export function useDeviceCapability(): DeviceCapability {
     // We'll consider older mobile devices or devices with reduced data/motion as low power
     const isLowPowerDevice = (isMobile && connectionSpeed === 'slow') || prefersReducedMotion;
 
+    // Determine if device is mid-range
+    // Mid-range is mobile but not low power
+    const isMidRangeDevice = isMobile && !isLowPowerDevice;
+
     setCapability({
       isLowPowerDevice,
       isMobile,
       prefersReducedMotion,
       connectionSpeed,
+      isMidRangeDevice,
     });
 
     const handleResize = () => {
-      setCapability(prev => ({
-        ...prev,
-        isMobile: window.innerWidth < 768
-      }));
+      setCapability(prev => {
+        const newIsMobile = window.innerWidth < 768;
+        const newIsMidRange = newIsMobile && !prev.isLowPowerDevice;
+        return {
+          ...prev,
+          isMobile: newIsMobile,
+          isMidRangeDevice: newIsMidRange
+        };
+      });
     };
 
     window.addEventListener('resize', handleResize);
